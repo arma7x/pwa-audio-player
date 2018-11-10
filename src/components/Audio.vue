@@ -94,12 +94,15 @@ export default {
       };
       this.player.onended = () => {
         if (this.repeat === 2) {
+          // repeat once
           this.player.play();
         } else {
           if (this.currentsequence < this.songlist.length) {
+            // repeat off
             this.playFile(this.currentsequence + 1);
           }
           if ((this.songlist.length - this.currentsequence) === 1 && this.repeat === 1) {
+            // repeat all
             this.currentsequence = -1;
             this.playFile(0);
           }
@@ -203,18 +206,12 @@ export default {
       }
     },
     togglePlay() {
-      if (this.player.paused === true) {
-        this.player.play();
-        bus.$emit('bus', { notification: {
-          type: 'info',
-          message: 'Play',
-        } });
-      } else {
-        this.player.pause();
-        bus.$emit('bus', { notification: {
-          type: 'info',
-          message: 'Pause',
-        } });
+      if (this.filelist.length > 0) {
+        if (this.player.paused === true) {
+          this.player.play();
+        } else {
+          this.player.pause();
+        }
       }
     },
     nextFile() {

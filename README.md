@@ -1,7 +1,7 @@
 # PWA Media Player
 
-# Demo
-https://pwamediaplayer.herokuapp.com/
+### Info:
+*  Demo https://cincaicms.herokuapp.com
 
 > A Vue.js project
 
