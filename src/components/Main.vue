@@ -2,8 +2,8 @@
   <div class="row justify-content-sm-center align-items-center" style="height:90vh;">
     <div class="text-center">
       <h1>{{ msg }}</h1>
-      <a href="/audio">Audio Player</a>
-      <a href="/playlist">Video Player</a>
+      <router-link to="/audio">Audio Player</router-link>
+      <router-link to="/video">Video Player</router-link>
     </div>
   </div>
 </template>
