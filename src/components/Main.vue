@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'main',
+  name: 'home',
   data() {
     return {
       msg: 'Welcome to PWA Media Player',

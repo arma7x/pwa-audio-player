@@ -61,7 +61,7 @@
 import bus from '../bus';
 
 export default {
-  name: 'audio',
+  name: 'audioplayer',
   data() {
     return {
       repeat: 0,

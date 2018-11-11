@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Main from '@/components/Main';
 import AudioPlayer from '@/components/Audio';
+import VideoPlayer from '@/components/Video';
 import NotFound404 from '@/components/NotFound404';
 
 Vue.use(Router);
@@ -17,6 +18,11 @@ export default new Router({
       path: '/audio',
       name: 'Audio Player',
       component: AudioPlayer,
+    },
+    {
+      path: '/video',
+      name: 'Video Player',
+      component: VideoPlayer,
     },
     {
       path: '*',

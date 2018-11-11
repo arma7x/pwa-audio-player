@@ -50,13 +50,18 @@ export default {
       if (state.audio !== undefined) {
         this.audio = state.audio;
       }
+      if (state.video !== undefined) {
+        this.video = state.video;
+      }
     });
   },
   methods: {
     goBack() {
       if (this.audio === true || this.video === true) {
         // eslint-disable-next-line
-        if (confirm(`Are you sure to stop playing the ${this.audio ? 'audio' : 'video'} ?`)) {
+        if (confirm(`Are you sure to stop playing the ${this.audio ? 'song' : 'video'} ?`)) {
+          this.audio = false;
+          this.video = false;
           this.$router.back();
         }
       } else {
