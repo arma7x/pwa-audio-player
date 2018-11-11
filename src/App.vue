@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <b-navbar type="light" variant="secondary" :sticky="true" style="z-index:99999999">
+    <b-navbar class="shadow" type="light" variant="secondary" :sticky="true" style="z-index:99999999">
       <b-navbar-brand>
         <span>
-          <a class="font-weight-bold" v-on:click="$router.currentRoute.name != main ? $router.back() : null" style="color:#ffffff;text-decoration: none;">
+          <a class="font-weight-bold" v-on:click="$router.currentRoute.name != main ? goBack() : null" style="color:#ffffff;text-decoration: none;">
             <img v-show="$router.currentRoute.name != main" :src='icon' width="20px" height="20px" style="margin: -5px 10px 0 0;"/> 
             {{ $router.currentRoute.name }}
           </a>
         </span>
       </b-navbar-brand>
     </b-navbar>
-    <div class="container" style="min-height:90vh;">
+    <div class="container" style="min-height:89vh;">
       <router-view></router-view>
     </div>
   </div>
@@ -32,6 +32,8 @@ export default {
   data() {
     return {
       main: router.options.routes[0].name,
+      audio: false,
+      video: false,
       icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gsFBgw0XtoWAQAAAb9JREFUeNrt3cENgzAABEGO/ntOPvnQAHK04xK8I7CNJa4rPD6/UZ6DleM/JmIbANH4ZQQTv41g4rcRTPw2gonfRjDx2wgmfhvBxG8jmPhtBBO/jWDiewKIbw0gvl2A+M4BxG/F/2sA4ocBiB8GIH4YgPhhAOKHAYgfBiB+GID4YQDihwGIHwYgfhiA+GEA4ocBiB8GIH4YgPhhAOKHAYgfBiB+GID4YQDihwGIHwYgfhiA+GEA4ocBiB8GIH4YgPhhAOKHAYgfBiB+GID4YQDihwGIHwYgfhiA+GEA4ocBiB8GIH4YQP2femkA4ocBiB8GIH4YgPhhAOKHAYgfBiB+e9ymwCvAK8AiEALbQAgAgAAACACAAAAIAHgLgQshhwOAAAAIAIAAAAgAgAAACACAAAAIAIAAAAgAgAAACACAAAAIAIAAAAgAgAAACACAAAAIAIAAAAgAgAAACACAAAAIAIAAAAgAgAAACACAAAAIAIAAAAgAgAAACACAAAAIAIAAAAgAgAAACACAAAAIADgFgSdAGIE1QBiBXUAYgXOAMAIngWEEvgWEEfgaGEbgPkAYgRtBYQSuiEcR1P+N+AVpKwRSoxRD+AAAAABJRU5ErkJggg==',
     };
   },
@@ -45,7 +47,22 @@ export default {
           className: `bg-${state.notification.type} text-white`,
         });
       }
+      if (state.audio !== undefined) {
+        this.audio = state.audio;
+      }
     });
+  },
+  methods: {
+    goBack() {
+      if (this.audio === true || this.video === true) {
+        // eslint-disable-next-line
+        if (confirm(`Are you sure to stop playing the ${this.audio ? 'audio' : 'video'} ?`)) {
+          this.$router.back();
+        }
+      } else {
+        this.$router.back();
+      }
+    },
   },
 };
 </script>

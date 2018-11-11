@@ -49,7 +49,7 @@
     </div>
     <div id="playlist-panel" class="mt-2 col-sm-4 offset-sm-4 align-items-center fixed-top" style="margin:auto;width:320px;overflow-y:scroll;height:53%;top:280px;">
       <b-list-group>
-        <b-list-group-item class="text-left" v-bind:class="{ 'active': (song.index == currentsong), 'notactive': (song.index != currentsong) }" v-for="song in songlist" :key="song.index" @click="jumpFile(song.index)">
+        <b-list-group-item class="text-left" style="border:0;border-radius:0;" v-bind:class="{ 'playing': (song.index == currentsong), 'notplay': (song.index != currentsong) }" v-for="song in songlist" :key="song.index" @click="jumpFile(song.index)">
           {{ song.name }}
         </b-list-group-item>
       </b-list-group>
@@ -136,10 +136,13 @@ export default {
             index++;
           }
         }
-        bus.$emit('bus', { notification: {
-          type: 'info',
-          message: `Load ${this.sequencelist.length} songs`,
-        } });
+        bus.$emit('bus', {
+          notification: {
+            type: 'info',
+            message: `Load ${this.sequencelist.length} songs`,
+          },
+          audio: true,
+        });
         this.playFile(0);
         this.shuffling();
       }
@@ -270,7 +273,12 @@ export default {
   background-color:#F1F3F4;
 }
 
-.notactive {
+.playing {
+  background-color: #EA67A3;
+  color: #ffffff;
+}
+
+.notplay {
   background-color:#F1F3F4;
 }
 
@@ -302,28 +310,5 @@ export default {
 @keyframes marquee {
   0%   { transform: translate(0, 0); }
   100% { transform: translate(-100%, 0); }
-}
-
-.upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-}
-
-.btn-files {
-  border: 2px solid gray;
-  color: gray;
-  background-color: white;
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.upload-btn-wrapper input[type=file] {
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
 }
 </style>
