@@ -6,7 +6,7 @@
           <span>{{ songlist[currentsong].name }}</span>
         </h6>
         <h6 v-else class="microsoft marquee">
-          <span>Please click 'Choose Files'</span>
+          <span>Please click 'Select Songs'</span>
         </h6>
       </div>
       <div class="row justify-content-center align-items-center">
@@ -54,7 +54,7 @@
     </div>
     <div id="playlist-panel" class="mt-2 col-sm-4 offset-sm-4 align-items-center fixed-top" style="margin:auto;width:320px;overflow-y:scroll;height:53%;top:280px;">
       <b-list-group>
-        <b-list-group-item class="text-left" style="border:0;border-radius:0;" v-bind:class="{ 'playing shadow-header': (song.index == currentsong), 'notplay': (song.index != currentsong) }" v-for="song in songlist" :key="song.index" @click="jumpFile(song.index)">
+        <b-list-group-item class="text-left" style="border:0;border-radius:0;" v-bind:class="{ 'playing shadow': (song.index == currentsong), 'notplay': (song.index != currentsong) }" v-for="song in songlist" :key="song.index" @click="jumpFile(song.index)">
           {{ song.name }}
         </b-list-group-item>
       </b-list-group>
@@ -244,14 +244,6 @@ export default {
     },
     playFile(index) {
       if (this.sequencelist[index] !== undefined && this.currentsequence !== index) {
-        // eslint-disable-next-line
-        // console.dir(this.player);
-        // eslint-disable-next-line
-        // console.dir(index);
-        // eslint-disable-next-line
-        // console.dir(this.sequencelist[index]);
-        // eslint-disable-next-line
-        // console.dir(this.songlist[this.sequencelist[index]]);
         const freader = new FileReader();
         this.currentsequence = index;
         this.currentsong = this.songlist[this.sequencelist[index]].index;

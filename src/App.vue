@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <b-navbar class="shadow-header" type="light" variant="secondary" :sticky="true" style="z-index:99999999;border:0px;">
+    <b-navbar class="shadow-header" type="light" variant="secondary" :sticky="true">
       <b-navbar-brand>
         <span>
-          <a class="font-weight-bold" v-on:click="$router.currentRoute.name != main ? goBack() : null" style="color:#ffffff;text-decoration: none;">
+          <a class="font-weight-bold" v-on:click="$router.currentRoute.name != main ? goBack() : null" style="color:#ffffff;text-decoration:none;">
             <img v-show="$router.currentRoute.name != main" :src='icon' width="20px" height="20px" style="margin: -5px 10px 0 0;"/> 
             {{ $router.currentRoute.name }}
           </a>
@@ -75,5 +75,6 @@ export default {
 <style>
 .shadow-header {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  z-index: 99999999;
 }
 </style>
