@@ -86,7 +86,7 @@ export default {
       const appheight = document.getElementById('app').clientHeight;
       const playerpanelheight = document.getElementById('player-panel').clientHeight;
       // eslint-disable-next-line
-      const playlistheight = parseInt(appheight) - (parseInt(playerpanelheight) + 66 + 30);
+      const playlistheight = parseInt(appheight) - (parseInt(playerpanelheight) + 66);
       document.getElementById('playlist-panel').style.height = `${playlistheight}px`;
       this.player = document.getElementById('player');
       this.player.controls = true;
