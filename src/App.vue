@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar class="shadow" type="light" variant="secondary" :sticky="true" style="z-index:99999999">
+    <b-navbar class="shadow-header" type="light" variant="secondary" :sticky="true" style="z-index:99999999;border:0px;">
       <b-navbar-brand>
         <span>
           <a class="font-weight-bold" v-on:click="$router.currentRoute.name != main ? goBack() : null" style="color:#ffffff;text-decoration: none;">
@@ -73,4 +73,7 @@ export default {
 </script>
 
 <style>
+.shadow-header {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
 </style>

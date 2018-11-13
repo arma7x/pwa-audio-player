@@ -44,12 +44,17 @@
             <b-form-radio value="*">Mobile Friendly</b-form-radio>
           </b-form-radio-group>
         </b-form-group>
-        <input style="width:113px;" ref="selected_files" type="file" :accept="accept" @change="processFiles" multiple/>
+        <div id="upload_button">
+          <label>
+            <input id="pick" style="width:113px;" ref="selected_files" type="file" :accept="accept" @change="processFiles" multiple/>
+            <span class="btn btn-sm btn-secondary">Select Songs</span>
+          </label>
+        </div>
       </div>
     </div>
     <div id="playlist-panel" class="mt-2 col-sm-4 offset-sm-4 align-items-center fixed-top" style="margin:auto;width:320px;overflow-y:scroll;height:53%;top:280px;">
       <b-list-group>
-        <b-list-group-item class="text-left" style="border:0;border-radius:0;" v-bind:class="{ 'playing': (song.index == currentsong), 'notplay': (song.index != currentsong) }" v-for="song in songlist" :key="song.index" @click="jumpFile(song.index)">
+        <b-list-group-item class="text-left" style="border:0;border-radius:0;" v-bind:class="{ 'playing shadow-header': (song.index == currentsong), 'notplay': (song.index != currentsong) }" v-for="song in songlist" :key="song.index" @click="jumpFile(song.index)">
           {{ song.name }}
         </b-list-group-item>
       </b-list-group>
@@ -263,6 +268,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+
+#upload_button {
+  display: inline-block;
+}
+
+#upload_button input[type=file] {
+  display:none;
+}
 
 .overlap-play-button {
   z-index: 99999999;
