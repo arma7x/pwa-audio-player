@@ -203,7 +203,7 @@ export default {
         this.repeat = 2;
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Repeat Current Song',
+          message: 'Repeat Once',
         } });
       } else {
         this.repeat = 0;
