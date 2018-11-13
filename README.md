@@ -3,7 +3,7 @@
 ### Info:
 *  Demo https://pwaaudioplayer.herokuapp.com
 
-> A Vue.js project
+> An audio player built with Vue.js
 
 ## Build Setup
 
