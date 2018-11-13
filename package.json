@@ -1,5 +1,5 @@
 {
-  "name": "pwa-media-player",
+  "name": "pwa-audio-player",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "arma7x",
@@ -15,7 +15,6 @@
     "bootstrap-vue": "^2.0.0-rc.11",
     "install": "^0.12.2",
     "npm": "^6.4.1",
-    "srt-webvtt": "^1.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-toasted": "^1.1.25"

@@ -1,7 +1,7 @@
-# PWA Media Player
+# PWA Audio Player
 
 ### Info:
-*  Demo https://pwamediaplayer.herokuapp.com
+*  Demo https://pwaaudioplayer.herokuapp.com
 
 > A Vue.js project
 

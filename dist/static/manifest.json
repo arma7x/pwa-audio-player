@@ -1,6 +1,6 @@
 {
-  "name": "PWA Media Player",
-  "short_name": "Media Player",
+  "name": "PWA Audio Player",
+  "short_name": "Audio Player",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",

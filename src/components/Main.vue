@@ -13,7 +13,7 @@ export default {
   name: 'home',
   data() {
     return {
-      msg: 'Welcome to PWA Media Player',
+      msg: 'Welcome to PWA Audio Player',
     };
   },
 };
