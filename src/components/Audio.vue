@@ -54,7 +54,7 @@
     </div>
     <div id="playlist-panel" class="mt-2 col-sm-4 offset-sm-4 align-items-center fixed-top" style="margin:auto;width:320px;overflow-y:scroll;height:53%;top:280px;">
       <b-list-group>
-        <b-list-group-item class="text-left" style="border:0;border-radius:0;" v-bind:class="{ 'playing shadow': (song.index == currentsong), 'notplay': (song.index != currentsong) }" v-for="song in songlist" :key="song.index" @click="jumpFile(song.index)">
+        <b-list-group-item class="text-left" style="border:0;border-radius:0;" v-bind:class="{ 'playing shadow': (song.index == currentsong), 'notplay': (song.index != currentsong) }" v-for="(song, index) in songlist" :key="song.index" @click="jumpFile(index)">
           {{ song.name }}
         </b-list-group-item>
       </b-list-group>
@@ -70,9 +70,9 @@ export default {
   data() {
     return {
       repeat: 0,
+      shuffle: false,
       accept: 'audio/*',
       paused: true,
-      shuffle: false,
       currentsequence: -1,
       sequencelist: [],
       currentsong: -1,
@@ -83,6 +83,9 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      // eslint-disable-next-line
+      this.repeat = parseInt(localStorage.getItem('repeat') || 0);
+      this.shuffle = JSON.parse(localStorage.getItem('shuffle') || false);
       const appheight = document.getElementById('app').clientHeight;
       const playerpanelheight = document.getElementById('player-panel').clientHeight;
       // eslint-disable-next-line
@@ -103,7 +106,7 @@ export default {
           this.player.play();
         } else {
           if (this.currentsequence < this.songlist.length) {
-            // repeat off
+            // repeat off && play next until end
             this.playFile(this.currentsequence + 1);
           }
           if ((this.songlist.length - this.currentsequence) === 1 && this.repeat === 1) {
@@ -155,11 +158,13 @@ export default {
     toggleShuffle() {
       this.shuffle = !this.shuffle;
       if (this.shuffle) {
+        localStorage.setItem('shuffle', true);
         bus.$emit('bus', { notification: {
           type: 'info',
           message: 'Shuffle On',
         } });
       } else {
+        localStorage.setItem('shuffle', false);
         bus.$emit('bus', { notification: {
           type: 'info',
           message: 'Shuffle Off',
@@ -181,6 +186,7 @@ export default {
           const replaceValue = this.sequencelist[this.sequencelist.indexOf(this.currentsong)];
           this.sequencelist[0] = replaceValue;
           this.sequencelist[replaceOrder] = firstValue;
+          this.currentsequence = 0;
         } else {
           const firstValue = this.sequencelist[0];
           const replaceOrder = this.sequencelist.indexOf(0);
@@ -195,18 +201,21 @@ export default {
     toggleRepeat() {
       if (this.repeat === 0) {
         this.repeat = 1;
+        localStorage.setItem('repeat', 1);
         bus.$emit('bus', { notification: {
           type: 'info',
           message: 'Repeat All',
         } });
       } else if (this.repeat === 1) {
         this.repeat = 2;
+        localStorage.setItem('repeat', 2);
         bus.$emit('bus', { notification: {
           type: 'info',
           message: 'Repeat Once',
         } });
       } else {
         this.repeat = 0;
+        localStorage.setItem('repeat', 0);
         bus.$emit('bus', { notification: {
           type: 'info',
           message: 'Repeat Off',
@@ -224,18 +233,26 @@ export default {
     },
     nextFile() {
       if (this.currentsequence !== -1) {
-        this.playFile(this.currentsequence + 1);
+        if ((this.currentsequence + 1) === this.songlist.length) {
+          this.playFile(0);
+        } else {
+          this.playFile(this.currentsequence + 1);
+        }
       }
     },
     prevFile() {
       if (this.currentsequence !== -1) {
-        this.playFile(this.currentsequence - 1);
+        if ((this.currentsequence - 1) === -1) {
+          this.playFile(this.songlist.length - 1);
+        } else {
+          this.playFile(this.currentsequence - 1);
+        }
       }
     },
     jumpFile(indexsong) {
       if (this.filelist.length > 0) {
         if (this.shuffle) {
-          this.playFile(this.sequencelist.indexOf(indexsong));
+          this.playFile(this.sequencelist.indexOf(this.songlist[indexsong].index));
         } else {
           this.playFile(indexsong);
         }
