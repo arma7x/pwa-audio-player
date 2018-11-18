@@ -32,8 +32,8 @@
           <button class="btn btn-sm btn-light" style="border:0px;width:75px;background-color:#F1F3F4;border-bottom-right-radius:25px;border-top-right-radius:25px;" @click="toggleRepeat">
             <img class="media-button" :src="repeat == 0 ? require('../assets/no-repeat.png')
           : (repeat == 1 
-          ? require('../assets/repeat-all.png')
-          : require('../assets/repeat-one.png'))"/>
+          ? require('../assets/repeat-one.png')
+          : require('../assets/repeat-all.png'))"/>
           </button>
         </div>
       </div>
@@ -101,19 +101,15 @@ export default {
         this.paused = true;
       };
       this.player.onended = () => {
-        if (this.repeat === 2) {
+        if (this.repeat === 1) {
           // repeat once
           this.player.play();
-        } else {
-          if (this.currentsequence < this.songlist.length) {
-            // repeat off && play next until end
-            this.playFile(this.currentsequence + 1);
-          }
-          if ((this.songlist.length - this.currentsequence) === 1 && this.repeat === 1) {
-            // repeat all
-            this.currentsequence = -1;
-            this.playFile(0);
-          }
+        } else if ((this.songlist.length - this.currentsequence) === 1 && this.repeat === 2) {
+          this.currentsequence = -1;
+          this.playFile(0);
+        } else if (this.currentsequence < this.songlist.length) {
+          // repeat off && play next until end
+          this.playFile(this.currentsequence + 1);
         }
       };
     });
@@ -204,14 +200,14 @@ export default {
         localStorage.setItem('repeat', 1);
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Repeat All',
+          message: 'Repeat Once',
         } });
       } else if (this.repeat === 1) {
         this.repeat = 2;
         localStorage.setItem('repeat', 2);
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Repeat Once',
+          message: 'Repeat All',
         } });
       } else {
         this.repeat = 0;
