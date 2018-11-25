@@ -157,13 +157,13 @@ export default {
         localStorage.setItem('shuffle', true);
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Shuffle On',
+          message: 'Shuffle is on',
         } });
       } else {
         localStorage.setItem('shuffle', false);
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Shuffle Off',
+          message: 'Shuffle is off',
         } });
       }
       this.shuffling();
@@ -200,21 +200,21 @@ export default {
         localStorage.setItem('repeat', 1);
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Repeat Once',
+          message: 'Repeat current song',
         } });
       } else if (this.repeat === 1) {
         this.repeat = 2;
         localStorage.setItem('repeat', 2);
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Repeat All',
+          message: 'Repeat all song',
         } });
       } else {
         this.repeat = 0;
         localStorage.setItem('repeat', 0);
         bus.$emit('bus', { notification: {
           type: 'info',
-          message: 'Repeat Off',
+          message: 'Repeat is off',
         } });
       }
     },
