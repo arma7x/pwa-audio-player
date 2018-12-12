@@ -23,15 +23,8 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-import Vue from 'vue';
-import Toasted from 'vue-toasted';
 import router from './router';
 import bus from './bus';
-
-Vue.use(Toasted);
-// const bus = new Vue();
 
 export default {
   name: 'app',
@@ -46,12 +39,7 @@ export default {
   created() {
     bus.$on('bus', (state) => {
       if (state.notification !== undefined) {
-        this.$toasted.show(`<span class="font-weight-normal">${state.notification.message}<span>`, {
-          theme: 'primary',
-          position: 'top-right',
-          duration: 5000,
-          className: `bg-${state.notification.type} text-white`,
-        });
+        this.$toast(state.notification.message);
       }
       if (state.audio !== undefined) {
         this.audio = state.audio;

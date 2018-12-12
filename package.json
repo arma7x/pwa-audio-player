@@ -17,7 +17,7 @@
     "npm": "^6.4.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vue-toasted": "^1.1.25"
+    "vue2-toast": "^2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",
