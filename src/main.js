@@ -10,6 +10,7 @@ import bFormGroup from 'bootstrap-vue/es/components/form-group/form-group';
 import bFormRadio from 'bootstrap-vue/es/components/form-radio/form-radio';
 import bFormRadioGroup from 'bootstrap-vue/es/components/form-radio/form-radio-group';
 import bListGroup from 'bootstrap-vue/es/components/list-group/list-group';
+import bListGroupItem from 'bootstrap-vue/es/components/list-group/list-group-item';
 import App from './App';
 import router from './router';
 
@@ -19,6 +20,7 @@ Vue.component('b-form-group', bFormGroup);
 Vue.component('b-form-radio', bFormRadio);
 Vue.component('b-form-radio-group', bFormRadioGroup);
 Vue.component('b-list-group', bListGroup);
+Vue.component('b-list-group-item', bListGroupItem);
 
 Vue.use(Toast, {
   type: 'bottom',
